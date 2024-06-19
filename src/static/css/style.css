@@ -1,0 +1,48 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    min-height: 50px;
+    border-bottom: 3px solid #0078D4;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.left_params{
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    background-color: lightcoral;
+}
+
+.working_area{
+    display: flex;
+    flex-direction: column;
+}
+
+.right_params{
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    background-color: aquamarine;
+}
+
+footer {
+    min-height: 20px;
+    color: #ffffff;
+    background-color: #0078D4;
+    text-align: center;
+    align-content: end;
+}
