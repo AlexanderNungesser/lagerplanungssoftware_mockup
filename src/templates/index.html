@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename= 'images/SmartDepot_bold.svg') }}"
+        type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,19 +12,36 @@
 </head>
 
 <body>
-    <header>Header</header>
+
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename= 'images/SmartDepot_bold.svg') }}" width="25" height="25"
+                class="d-inline-block align-top" alt="Logo">
+        </a>
+    </header>
     <main>
         <div class="left_params"></div>
-        <div class="working_area"></div>
-        <div class="right_params"></div>
+        <div class="handle left-handle"></div>
+        <div class="working_area">
+            <!-- <img src="{{ url_for('static', filename= 'images/depot_plan.jpg') }}" alt="Depot" width="1200" height="600"> -->
+        </div>
+        <div class="handle right-handle"></div>
+        <div class="right_params">
+            <button type="button" class="btn btn-primary">Level 1</button>
+            <button type="button" class="btn btn-primary">Level 2</button>
+            <button type="button" class="btn btn-primary">Level 3</button>
+        </div>
     </main>
-    <footer>SmartDepot © 2024</footer>
+    <footer>
+        <p>SmartDepot © 2024</p>
+    </footer>
 
 
 
 
     <!-- Bootstrap Javascripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename= 'scripts/script.js') }}"></script>
 </body>
 
 </html>
