@@ -1,11 +1,44 @@
 var handlers = document.querySelectorAll('.handle');
 var main = document.querySelector('main');
 var left = main.querySelector('.left_params');
-var right = main.querySelector('.right_params');
 var isDragging = false;
 var activeHandler = null;
 
-document.addEventListener('mousedown', function(e) {
+function changeDropdownWerk(element) {
+  var dropdownButton = document.getElementById('dropdown-werk');
+  dropdownButton.textContent = element.textContent;
+}
+
+function changeDropdownLager(element) {
+  var dropdownButton = document.getElementById('dropdown-lager');
+  dropdownButton.textContent = element.textContent;
+}
+
+function changeDepotPlanLevel(element) {
+  var depotPlanImage = document.getElementById('depot-plan');
+  var baseUrl = depotPlanImage.getAttribute('data-base-url');
+  var filename = '';
+  switch (element.id) {
+    case 'level-1':
+      filename = 'depot_plan_1.svg';
+      break;
+    case 'level-2':
+      filename = 'depot_plan_2.svg';
+      break;
+    case 'level-3':
+      filename = 'depot_plan_3.svg';
+      break;
+  }
+  depotPlanImage.setAttribute('src', `${baseUrl}${filename}`);
+}
+
+
+function changeAccountMode() {
+  var login = document.querySelector('.login');
+  login.style.display = 'flex';
+}
+
+document.addEventListener('mousedown', function (e) {
   handlers.forEach(handler => {
     if (e.target === handler) {
       isDragging = true;
@@ -14,7 +47,7 @@ document.addEventListener('mousedown', function(e) {
   });
 });
 
-document.addEventListener('mousemove', function(e) {
+document.addEventListener('mousemove', function (e) {
   if (!isDragging) {
     return false;
   }
@@ -28,16 +61,9 @@ document.addEventListener('mousemove', function(e) {
     left.style.width = (Math.max(boxMinWidth, pointerRelativeXpos - 5)) + 'px';
     left.style.flexGrow = 0;
   }
-
-  if (activeHandler.classList.contains('right-handle')) {
-    var pointerRelativeXpos = containerOffsetRight - e.clientX;
-    var boxMinWidth = 100;
-    right.style.width = (Math.max(boxMinWidth, pointerRelativeXpos - 5)) + 'px';
-    right.style.flexGrow = 0;
-  }
 });
 
-document.addEventListener('mouseup', function(e) {
+document.addEventListener('mouseup', function (e) {
   isDragging = false;
   activeHandler = null;
 });

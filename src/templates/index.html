@@ -18,19 +18,130 @@
             <img src="{{ url_for('static', filename= 'images/SmartDepot_bold.svg') }}" width="25" height="25"
                 class="d-inline-block align-top" alt="Logo">
         </a>
+
+        <div class="top-params">
+            <div class="dropdown">
+                <button id="dropdown-lager" class="btn btn-primary dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Lager
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdown-lager">
+                    <li><a class="dropdown-item" href="#" onclick="changeDropdownLager(this)">Lager A</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="changeDropdownLager(this)">Lager B</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="changeDropdownLager(this)">Lager C</a></li>
+                </ul>
+                <button id="dropdown-werk" class="btn btn-primary dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Werk
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdown-werk">
+                    <li><a class="dropdown-item" href="#" onclick="changeDropdownWerk(this)">Werk A</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="changeDropdownWerk(this)">Werk B</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="changeDropdownWerk(this)">Werk C</a></li>
+                </ul>
+            </div>
+            <button id="account" type="button" class="btn btn-primary" onclick="changeAccountMode()">
+                <img src="{{ url_for('static', filename= 'images/account_bold.svg') }}" alt="Account" width="25"
+                    height="25">
+            </button>
+        </div>
     </header>
     <main>
-        <div class="left_params"></div>
+        <div class="left_params">
+
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceipt"
+                aria-expanded="false" aria-controls="collapseReceipt">
+                Wareneingang
+            </button>
+            </p>
+            <div class="collapse" id="collapseReceipt">
+                <div class="card card-body">
+                    Chuck Norris once ate at Taco Bell and didn’t get diarrhea. The dark is afraid of Chuck Norris.
+                    Chuck Norris can squeeze orange juice out of a lemon. Chuck Norris does not own a stove, oven, or
+                    microwave , because revenge is a dish best served cold. Chuck Norris can speak Braille.
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSend"
+                aria-expanded="false" aria-controls="collapseSend">
+                Warenausgang
+            </button>
+            </p>
+            <div class="collapse" id="collapseSend">
+                <div class="card card-body">
+                    Some placeholder content for the collapse component. This panel is hidden by default but revealed
+                    when the user activates the relevant trigger.
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypes"
+                aria-expanded="false" aria-controls="collapseTypes">
+                Warentypen
+            </button>
+            </p>
+            <div class="collapse" id="collapseTypes">
+                <div class="card card-body">
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Kälte
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Giftig
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Explosiv
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Betäubungsmittel
+                        </label>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
         <div class="handle left-handle"></div>
+
         <div class="working_area">
-            <!-- <img src="{{ url_for('static', filename= 'images/depot_plan.jpg') }}" alt="Depot" width="1200" height="600"> -->
+            <img id="depot-plan" src="{{ url_for('static', filename= 'images/depot_plan_1.svg') }}" alt="Depot"
+                data-base-url="{{ url_for('static', filename='images/') }}" width="850" height="616.25">
+            <div class="card card-body levels">
+                <button id="level-1" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)">Level
+                    1</button>
+                <button id="level-2" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)">Level
+                    2</button>
+                <button id="level-3" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)">Level
+                    3</button>
+            </div>
         </div>
-        <div class="handle right-handle"></div>
-        <div class="right_params">
-            <button type="button" class="btn btn-primary">Level 1</button>
-            <button type="button" class="btn btn-primary">Level 2</button>
-            <button type="button" class="btn btn-primary">Level 3</button>
+        <div class="card card-body login">
+            <h5 class="card-title">Login</h5>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="login(this)">Login</button>
         </div>
+
     </main>
     <footer>
         <p>SmartDepot © 2024</p>
