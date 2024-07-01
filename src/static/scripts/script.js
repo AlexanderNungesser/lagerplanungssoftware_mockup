@@ -35,8 +35,9 @@ function changeDepotPlanLevel(element) {
 
 function changeAccountMode() {
   var login = document.querySelector('.login');
-  login.style.display = 'flex';
+  login.style.display = (login.style.display === 'none' || login.style.display === '') ? 'flex' : 'none';
 }
+
 
 document.addEventListener('mousedown', function (e) {
   handlers.forEach(handler => {

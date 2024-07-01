@@ -40,9 +40,16 @@ main {
 }
 
 .login {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
     display: none;
-    justify-self: center;
-    align-self: center;
+    z-index: 10;
+}
+
+.login-button {
+    margin-top: 5%;
 }
 
 .left_params {
@@ -70,12 +77,15 @@ main {
 }
 
 .levels {
-    position: relative;
+    top: 50%;
+    left: 100%;
+    transform: translate(-105%, -50%);
+    position: absolute;
     justify-self: flex-end;
     justify-content: center;
     align-items: center;
-    width: min-content;
-    height: min-content;
+    min-width: 150px;
+    min-height: 150px;
     padding: 2%;
     z-index: 3;
 }
