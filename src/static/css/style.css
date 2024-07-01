@@ -111,9 +111,9 @@ main {
 }
 
 footer {
-    font-size: small;
-    min-height: 20px;
-    max-height: 20px;
+    font-size: x-small;
+    min-height: 15px;
+    max-height: 15px;
     color: #ffffff;
     background-color: var(--smartdepot-blue);
     text-align: center;
