@@ -39,9 +39,9 @@
                     <li><a class="dropdown-item" href="#" onclick="changeDropdownWerk(this)">Werk C</a></li>
                 </ul>
             </div>
-            <button id="account" type="button" class="btn btn-primary" onclick="changeAccountMode()">
-                <img src="{{ url_for('static', filename= 'images/account_bold.svg') }}" alt="Account" width="25"
-                    height="25">
+            <button id="account-button" type="button" class="btn btn-primary" onclick="changeAccountMode()">
+                <img id="account-icon" src="{{ url_for('static', filename= 'images/account_bold.svg') }}" alt="Account" width="25"
+                    height="25" data-base-url="{{ url_for('static', filename='images/') }}">
             </button>
         </div>
     </header>
@@ -133,14 +133,14 @@
         <div class="card card-body login">
             <h5 class="card-title">Login</h5>
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+                <label for="floatingEmail">Email address</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
-            <button type="button" class="btn btn-primary login-button" onclick="login(this)">Login</button>
+            <button type="submit" class="btn btn-primary login-button" onclick="login()">Login</button>
         </div>
 
     </main>

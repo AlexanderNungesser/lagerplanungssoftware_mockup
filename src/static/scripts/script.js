@@ -34,8 +34,28 @@ function changeDepotPlanLevel(element) {
 
 
 function changeAccountMode() {
-  var login = document.querySelector('.login');
-  login.style.display = (login.style.display === 'none' || login.style.display === '') ? 'flex' : 'none';
+  var accountIcon = document.getElementById('account-icon');
+  var baseUrl = accountIcon.getAttribute('data-base-url');
+  if (accountIcon.getAttribute('src').includes('logout_bold.svg')) {
+    accountIcon.setAttribute('src', `${baseUrl}account_bold.svg`);
+  } else {
+    var login = document.querySelector('.login');
+    login.style.display = (login.style.display === 'none' || login.style.display === '') ? 'flex' : 'none';
+  }
+}
+
+function login() {
+  var accountIcon = document.getElementById('account-icon');
+  var baseUrl = accountIcon.getAttribute('data-base-url');
+  var email = document.getElementById('floatingEmail');
+  var password = document.getElementById('floatingPassword');
+  if (email.value == 'admin@smartdepot.com' && password.value == 'admin') {
+    accountIcon.setAttribute('src', `${baseUrl}logout_bold.svg`);
+    var login = document.querySelector('.login');
+    login.style.display = 'none';
+  }
+  email.value = '';
+  password.value = '';
 }
 
 
