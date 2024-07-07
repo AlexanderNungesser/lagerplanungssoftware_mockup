@@ -2,20 +2,20 @@
   <!-- Hintergrund -->
   <rect width="100%" height="100%" fill="#ffffff" />
 
-  <!-- Bereich: Gekühlte Waren -->
-  <rect x="20" y="20" width="960" height="160" fill="#ADD8E6" stroke="#000" />
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="20" y="20" width="960" height="160" fill="#fff" stroke="#000" id="kalt"/>
   <text x="460" y="40" font-family="Arial" font-size="16" fill="#000" text-anchor="middle">Kühl</text>
   
-  <!-- Bereich: Giftige Waren -->
-  <rect x="20" y="200" width="960" height="160" fill="#FF6347" stroke="#000" />
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="20" y="200" width="960" height="160" fill="#fff" stroke="#000" id="gift"/>
   <text x="460" y="220" font-family="Arial" font-size="16" fill="#000" text-anchor="middle">Giftig</text>
   
-  <!-- Bereich: Explosionsgeschützt -->
-  <rect x="20" y="380" width="960" height="160" fill="#FFD700" stroke="#000" />
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="20" y="380" width="960" height="160" fill="#fff" stroke="#000" id="explosiv"/>
   <text x="460" y="400" font-family="Arial" font-size="16" fill="#000" text-anchor="middle">Explosiv</text>
   
-  <!-- Bereich: Betäubungsmittel -->
-  <rect x="20" y="560" width="960" height="160" fill="#98FB98" stroke="#000" />
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="20" y="560" width="960" height="160" fill="#fff" stroke="#000" id="btm"/>
   <text x="460" y="580" font-family="Arial" font-size="16" fill="#000" text-anchor="middle">Betäubungsmittel</text>
   
   <!-- Lagerplätze für Gekühlte Waren -->
@@ -87,4 +87,15 @@
   
   <text x="620" y="620" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.3</text>
   <rect x="620" y="630" width="120" height="50" fill="#FFF" stroke="#000" />
+  <style>
+  svg
+  {
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  </style>
 </svg>
