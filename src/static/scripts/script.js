@@ -4,6 +4,41 @@ var left = main.querySelector('.left_params');
 var isDragging = false;
 var activeHandler = null;
 
+function displayTypesOfGoods(checkbox) {
+  var iframe = document.getElementById("depot-plan");
+  var content = iframe.contentDocument || iframe.contentWindow.document;
+  var area;
+  var fill;
+  console.log(content)
+  switch (checkbox.id.split(' ')[1]) {
+    case 'kalt':
+      area = content.getElementById("kalt");
+      fill = "#ADD8E6";
+      break;
+    case 'gift':
+      area = content.getElementById("gift");
+      fill = "#FF6347";
+      break;
+    case 'explosiv':
+      area = content.getElementById("explosiv");
+      fill = "#FFD700";
+      break;
+    case 'btm':
+      area = content.getElementById("btm");
+      fill = "#98FB98";
+      break;
+    default:
+      break;
+  }
+
+  if (checkbox.checked == true) {
+    area.setAttribute("fill", fill);
+  } else {
+    area.setAttribute("fill", "white");
+  }
+}
+
+
 function changeDropdownWerk(element) {
   var dropdownButton = document.getElementById('dropdown-werk');
   dropdownButton.textContent = element.textContent;

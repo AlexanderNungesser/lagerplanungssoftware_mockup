@@ -93,6 +93,12 @@ main {
     padding: 20px;
 }
 
+#depot-plan {
+    width: 55vw;
+    height: 80vh;
+    border: none;
+}
+
 .levels {
     top: 50%;
     left: 100%;
