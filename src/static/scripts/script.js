@@ -87,6 +87,13 @@ function login() {
   password.value = '';
 }
 
+document.getElementById('floatingPassword').addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+      event.preventDefault();
+      login();
+  }
+});
+
 function closeLogin() {
   document.querySelector('.login').style.display = 'none';
 }
