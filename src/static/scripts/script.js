@@ -1,9 +1,3 @@
-var handlers = document.querySelectorAll('.handle');
-var main = document.querySelector('main');
-var left = main.querySelector('.left_params');
-var isDragging = false;
-var activeHandler = null;
-
 function displayTypesOfGoods(checkbox) {
   var iframe = document.getElementById("depot-plan");
   var content = iframe.contentDocument || iframe.contentWindow.document;
@@ -38,7 +32,6 @@ function displayTypesOfGoods(checkbox) {
   }
 }
 
-
 function changeDropdownWerk(element) {
   var dropdownButton = document.getElementById('dropdown-werk');
   dropdownButton.textContent = element.textContent;
@@ -67,7 +60,6 @@ function changeDepotPlanLevel(element) {
   depotPlanImage.setAttribute('src', `${baseUrl}${filename}`);
 }
 
-
 function changeAccountMode() {
   var accountIcon = document.getElementById('account-icon');
   if (accountIcon.getAttribute('src').includes('logout_bold.svg')) {
@@ -95,33 +87,33 @@ function login() {
   password.value = '';
 }
 
+function closeLogin() {
+  document.querySelector('.login').style.display = 'none';
+}
 
-document.addEventListener('mousedown', function (e) {
-  handlers.forEach(handler => {
-    if (e.target === handler) {
-      isDragging = true;
-      activeHandler = handler;
-    }
-  });
+const leftParams = document.querySelector('.left_params');
+const handle = document.querySelector('.handle');
+
+let isResizing = false;
+
+handle.addEventListener('mousedown', function (e) {
+  isResizing = true;
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
 
-document.addEventListener('mousemove', function (e) {
-  if (!isDragging) {
-    return false;
-  }
+function onMouseMove(e) {
+  if (!isResizing) return;
 
-  var containerOffsetLeft = main.offsetLeft;
-  var containerOffsetRight = main.offsetLeft + main.offsetWidth;
+  const newWidth = e.clientX;
+  if (newWidth < 100 || newWidth > window.innerWidth * 0.5) return;
 
-  if (activeHandler.classList.contains('left-handle')) {
-    var pointerRelativeXpos = e.clientX - containerOffsetLeft;
-    var boxMinWidth = 100;
-    left.style.width = (Math.max(boxMinWidth, pointerRelativeXpos - 5)) + 'px';
-    left.style.flexGrow = 0;
-  }
-});
+  leftParams.style.width = `${newWidth}px`;
+  handle.style.left = `${newWidth}px`;
+}
 
-document.addEventListener('mouseup', function (e) {
-  isDragging = false;
-  activeHandler = null;
-});
+function onMouseUp() {
+  isResizing = false;
+  document.removeEventListener('mousemove', onMouseMove);
+  document.removeEventListener('mouseup', onMouseUp);
+}

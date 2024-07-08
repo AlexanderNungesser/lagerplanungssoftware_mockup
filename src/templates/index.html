@@ -53,7 +53,7 @@
                 aria-expanded="false" aria-controls="collapseReceipt">
                 Wareneingang
             </button>
-            </p>
+
             <div class="collapse" id="collapseReceipt">
                 <div class="card card-body">
                     Chuck Norris once ate at Taco Bell and didn’t get diarrhea. The dark is afraid of Chuck Norris.
@@ -61,50 +61,56 @@
                     microwave , because revenge is a dish best served cold. Chuck Norris can speak Braille.
                 </div>
             </div>
+            <p></p>
 
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSend"
                 aria-expanded="false" aria-controls="collapseSend">
                 Warenausgang
             </button>
-            </p>
+
             <div class="collapse" id="collapseSend">
                 <div class="card card-body">
                     Some placeholder content for the collapse component. This panel is hidden by default but revealed
                     when the user activates the relevant trigger.
                 </div>
             </div>
+            <p></p>
 
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypes"
                 aria-expanded="false" aria-controls="collapseTypes">
                 Warentypen
             </button>
-            </p>
+
             <div class="collapse" id="collapseTypes">
                 <div class="card card-body">
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault kalt" onclick="displayTypesOfGoods(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault kalt"
+                            onclick="displayTypesOfGoods(this)">
                         <label class="form-check-label" for="flexCheckDefault">
                             Kälte
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault gift" onclick="displayTypesOfGoods(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault gift"
+                            onclick="displayTypesOfGoods(this)">
                         <label class="form-check-label" for="flexCheckDefault">
                             Giftig
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault explosiv" onclick="displayTypesOfGoods(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault explosiv"
+                            onclick="displayTypesOfGoods(this)">
                         <label class="form-check-label" for="flexCheckDefault">
                             Explosiv
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault btm" onclick="displayTypesOfGoods(this)">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault btm"
+                            onclick="displayTypesOfGoods(this)">
                         <label class="form-check-label" for="flexCheckDefault">
                             Betäubungsmittel
                         </label>
@@ -119,7 +125,7 @@
 
         <div class="working_area">
             <iframe id="depot-plan" src="{{ url_for('static', filename= 'images/depot_plan_1.svg') }}" alt="Depot"
-                data-base-url="{{ url_for('static', filename='images/') }}" scrolling="no"></iframe>
+                data-base-url="{{ url_for('static', filename='images/') }}" ></iframe>
         </div>
 
         <div class="levels">
@@ -132,7 +138,14 @@
         </div>
 
         <div class="card card-body login">
-            <h5 class="card-title">Login</h5>
+            <h5 class="card-title login-title">Login
+            </h5>
+            <button type="button" class="btn btn-primary close-login" onclick="closeLogin()">
+                <img src="{{ url_for('static', filename= 'images/close_bold.svg') }}" alt="close" width="20"
+                    height="20">
+            </button>
+
+
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="floatingEmail" placeholder="admin@smartdepot.com">
                 <label for="floatingEmail">Email</label>
@@ -148,7 +161,7 @@
     <footer>
         <p>SmartDepot © 2024</p>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename= 'scripts/script.js') }}"></script>
 </body>

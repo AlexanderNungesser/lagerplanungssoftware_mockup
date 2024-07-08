@@ -1,5 +1,4 @@
 :root {
-    --plan: url("../static/images/depot_plan.jpg");
     --smartdepot-blue: #0078D4;
     --smartdepot-grey: #d7d7d7;
 }
@@ -12,6 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 .bd-navbar {
@@ -48,12 +48,18 @@ main {
     z-index: 10;
 }
 
+.close-login {
+    top: 2px;
+    right: 2px;
+    position: absolute;
+    padding: 2px;
+}
+
 .login-button {
     margin-top: 5%;
 }
 
 .left_params {
-    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 100px;
@@ -67,7 +73,6 @@ main {
 }
 
 .handle {
-    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 2.5px;
@@ -90,13 +95,14 @@ main {
     align-items: center;
     z-index: 1;
     flex: 1 1 auto;
-    padding: 20px;
+    padding-right: 1%;
+    background-color: #ffffff;
 }
 
 #depot-plan {
-    width: 55vw;
-    height: 80vh;
-    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
 }
 
 .levels {
