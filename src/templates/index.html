@@ -48,34 +48,6 @@
     </header>
     <main>
         <div class="left_params">
-
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceipt"
-                aria-expanded="false" aria-controls="collapseReceipt">
-                Wareneingang
-            </button>
-
-            <div class="collapse" id="collapseReceipt">
-                <div class="card card-body">
-                    Chuck Norris once ate at Taco Bell and didn’t get diarrhea. The dark is afraid of Chuck Norris.
-                    Chuck Norris can squeeze orange juice out of a lemon. Chuck Norris does not own a stove, oven, or
-                    microwave , because revenge is a dish best served cold. Chuck Norris can speak Braille.
-                </div>
-            </div>
-            <p></p>
-
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSend"
-                aria-expanded="false" aria-controls="collapseSend">
-                Warenausgang
-            </button>
-
-            <div class="collapse" id="collapseSend">
-                <div class="card card-body">
-                    Some placeholder content for the collapse component. This panel is hidden by default but revealed
-                    when the user activates the relevant trigger.
-                </div>
-            </div>
-            <p></p>
-
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypes"
                 aria-expanded="false" aria-controls="collapseTypes">
                 Warentypen
@@ -119,13 +91,115 @@
 
                 </div>
             </div>
+            <p></p>
+
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceipt"
+                aria-expanded="false" aria-controls="collapseReceipt">
+                Wareneingang
+            </button>
+
+            <div class="collapse" id="collapseReceipt">
+                <div class="card card-body">
+                    <div id="collapseReceiptContent">
+                        <div class="card card-body delivery">
+                            <div class="header">
+                                <h6 class="card-title">Bezeichnung</h6>
+                                <h6 class="card-title">Charge-Nr.: 12345</h6>
+                            </div>
+                            <div class="content">
+                                <p>Paletten: 1</p>
+                                <p>Datum: 2024-07-17</p>
+                                <p>Temp.: -20 °C</p>
+                            </div>
+                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                        </div>
+                        <div class="card card-body delivery">
+                            <div class="header">
+                                <h6 class="card-title">Bezeichnung</h6>
+                                <h6 class="card-title">Charge-Nr.: 12345</h6>
+                            </div>
+                            <div class="content">
+                                <p>Paletten: 1</p>
+                                <p>Datum: 2024-07-17</p>
+                                <p>Temp.: -20 °C</p>
+                            </div>
+                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                        </div>
+                        <div class="card card-body delivery">
+                            <div class="header">
+                                <h6 class="card-title">Bezeichnung</h6>
+                                <h6 class="card-title">Charge-Nr.: 12345</h6>
+                            </div>
+                            <div class="content">
+                                <p>Paletten: 1</p>
+                                <p>Datum: 2024-07-17</p>
+                                <p>Temp.: -20 °C</p>
+                            </div>
+                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="displayDeliveryForm('receipt')">Lieferung
+                        Hinzufügen</button>
+                </div>
+            </div>
+            <p></p>
+
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSend"
+                aria-expanded="false" aria-controls="collapseSend">
+                Warenausgang
+            </button>
+
+            <div class="collapse" id="collapseSend">
+                <div class="card card-body">
+                    <div id="collapseSendContent">
+                        <div class="card card-body delivery">
+                            <div class="header">
+                                <h6 class="card-title">Bezeichnung</h6>
+                                <h6 class="card-title">Charge-Nr.: 12345</h6>
+                            </div>
+                            <div class="content">
+                                <p>Paletten: 1</p>
+                                <p>Datum: 2024-07-17</p>
+                                <p>Temp.: -20 °C</p>
+                            </div>
+                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                        </div>
+                        <div class="card card-body delivery">
+                            <div class="header">
+                                <h6 class="card-title">Bezeichnung</h6>
+                                <h6 class="card-title">Charge-Nr.: 12345</h6>
+                            </div>
+                            <div class="content">
+                                <p>Paletten: 1</p>
+                                <p>Datum: 2024-07-17</p>
+                                <p>Temp.: -20 °C</p>
+                            </div>
+                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                        </div>
+                        <div class="card card-body delivery">
+                            <div class="header">
+                                <h6 class="card-title">Bezeichnung</h6>
+                                <h6 class="card-title">Charge-Nr.: 12345</h6>
+                            </div>
+                            <div class="content">
+                                <p>Paletten: 1</p>
+                                <p>Datum: 2024-07-17</p>
+                                <p>Temp.: -20 °C</p>
+                            </div>
+                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="displayDeliveryForm('send')">Lieferung
+                        Hinzufügen</button>
+                </div>
+            </div>
         </div>
 
         <div class="handle left-handle"></div>
 
         <div class="working_area">
             <iframe id="depot-plan" src="{{ url_for('static', filename= 'images/depot_plan_1.svg') }}" alt="Depot"
-                data-base-url="{{ url_for('static', filename='images/') }}" ></iframe>
+                data-base-url="{{ url_for('static', filename='images/') }}"></iframe>
         </div>
 
         <div class="levels">
@@ -138,23 +212,65 @@
         </div>
 
         <div class="card card-body login">
-            <h5 class="card-title login-title">Login
-            </h5>
-            <button type="button" class="btn btn-primary close-login" onclick="closeLogin()">
+            <h5 class="card-title login-title">Login</h5>
+            <button type="button" class="btn btn-primary close" onclick="closeLogin()">
                 <img src="{{ url_for('static', filename= 'images/close_bold.svg') }}" alt="close" width="20"
                     height="20">
             </button>
-
 
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="floatingEmail" placeholder="admin@smartdepot.com">
                 <label for="floatingEmail">Email</label>
             </div>
+
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Passwort">
                 <label for="floatingPassword">Passwort</label>
             </div>
             <button type="submit" class="btn btn-primary login-button" onclick="login()">Login</button>
+        </div>
+
+        <div class="card card-body add-delivery">
+            <h5 class="card-title login-title">Lieferung Hinzufügen</h5>
+            <button type="button" class="btn btn-primary close" onclick="closeDeliveryForm()">
+                <img src="{{ url_for('static', filename= 'images/close_bold.svg') }}" alt="close" width="20"
+                    height="20">
+            </button>
+            <div class="header">
+                <h6 class="card-title">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingTitle">
+                        <label for="floatingTitle">Bezeichnung</label>
+                    </div>
+                </h6>
+                <h6 class="card-title">
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="floatingCharge" min="10000">
+                        <label for="floatingCharge">Charge-Nr</label>
+                    </div>
+                </h6>
+            </div>
+            <div class="content">
+                <p>
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="floatingPaletten" min="1" max="10">
+                    <label for="floatingPaletten">Paletten</label>
+                </div>
+                </p>
+                <p>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="floatingDatum">
+                    <label for="floatingDatum">Datum</label>
+                </div>
+                </p>
+                <p>
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="floatingTemp" min="-20" max="25">
+                    <label for="floatingTemp">Temperatur</label>
+                </div>
+                </p>
+            </div>
+            <button class="btn btn-primary" type="button" onclick="createDelivery(this)">Lieferung Anlegen</button>
         </div>
 
     </main>

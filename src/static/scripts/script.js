@@ -3,7 +3,6 @@ function displayTypesOfGoods(checkbox) {
   var content = iframe.contentDocument || iframe.contentWindow.document;
   var area;
   var fill;
-  console.log(content)
   switch (checkbox.id.split(' ')[1]) {
     case 'kalt':
       area = content.getElementById("kalt");
@@ -89,14 +88,58 @@ function login() {
 
 document.getElementById('floatingPassword').addEventListener('keypress', function (event) {
   if (event.key === 'Enter') {
-      event.preventDefault();
-      login();
+    event.preventDefault();
+    login();
   }
 });
 
 function closeLogin() {
   document.querySelector('.login').style.display = 'none';
 }
+
+function displayDeliveryForm(type) {
+  var delivery_form = document.querySelector('.add-delivery');
+  delivery_form.id = type;
+  delivery_form.style.display = (delivery_form.style.display === 'none' || delivery_form.style.display === '') ? 'flex' : 'none';
+}
+
+function closeDeliveryForm() {
+  document.querySelector('.add-delivery').style.display = 'none';
+}
+
+function getTodayDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+document.getElementById('floatingDatum').min = getTodayDate();
+
+function createDelivery(button) {
+  var title = document.getElementById('floatingTitle');
+  var charge = document.getElementById('floatingCharge');
+  var paletes = document.getElementById('floatingPaletten');
+  var date = document.getElementById('floatingDatum');
+  var temp = document.getElementById('floatingTemp');
+
+  var content = (button.parentElement.id == "receipt") ? document.getElementById('collapseReceiptContent') : document.getElementById('collapseSendContent');
+  content.innerHTML += `<div class="card card-body">
+                          <div class="header">
+                              <h6 class="card-title">${title.value}</h6>
+                              <h6 class="card-title">Charge-Nr.: ${charge.value}</h6>
+                          </div>
+                          <div class="content">
+                              <p>Paletten: ${paletes.value}</p>
+                              <p>Datum: ${date.value}</p>
+                              <p>Temp.: ${temp.value} °C</p>
+                          </div>
+                          <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                        </div>`;
+  closeDeliveryForm();
+}
+
 
 const leftParams = document.querySelector('.left_params');
 const handle = document.querySelector('.handle');

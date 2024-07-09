@@ -48,7 +48,7 @@ main {
     z-index: 10;
 }
 
-.close-login {
+.close {
     top: 2px;
     right: 2px;
     position: absolute;
@@ -62,14 +62,45 @@ main {
 .left_params {
     display: flex;
     flex-direction: column;
-    min-width: 100px;
-    width: 300px;
-    max-width: 50%;
+    min-width: 300px;
+    width: 500px;
+    max-width: 75%;
     height: 100%;
     z-index: 2;
     background-color: var(--smartdepot-grey);
     border-radius: 5px;
     overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.content p {
+    margin-right: 10px
+}
+
+.add-delivery {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    display: none;
+    z-index: 9;
+}
+
+.delivery{
+    margin-bottom: 5px;
 }
 
 .handle {
