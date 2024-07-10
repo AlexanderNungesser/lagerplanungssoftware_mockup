@@ -1,3 +1,7 @@
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button')) { bt.setAttribute('disabled', 'true'); } });
+
 function displayTypesOfGoods(checkbox) {
   var iframe = document.getElementById("depot-plan");
   var content = iframe.contentDocument || iframe.contentWindow.document;
@@ -39,24 +43,43 @@ function changeDropdownWerk(element) {
 function changeDropdownLager(element) {
   var dropdownButton = document.getElementById('dropdown-lager');
   dropdownButton.textContent = element.textContent;
+  var depotPlanImage = document.getElementById('depot-plan');
+  var baseUrl = depotPlanImage.getAttribute('data-base-url');
+  var filename = '';
+  switch (element.textContent) {
+    case 'Lager A':
+      filename = `depot_plan_A1.svg`;
+      break;
+    case 'Lager B':
+      filename = `depot_plan_B1.svg`;
+      break;
+    case 'Lager C':
+      filename = `depot_plan_C1.svg`;
+      break;
+  }
+  depotPlanImage.setAttribute('src', `${baseUrl}${filename}`);
+  setTimeout(function () { document.querySelectorAll('[type="checkbox"]').forEach(checkbox => displayTypesOfGoods(checkbox));}, 50);
 }
 
 function changeDepotPlanLevel(element) {
   var depotPlanImage = document.getElementById('depot-plan');
   var baseUrl = depotPlanImage.getAttribute('data-base-url');
+  var lager = document.getElementById('dropdown-lager').textContent.split(' ')[1];
+
   var filename = '';
   switch (element.id) {
     case 'level-1':
-      filename = 'depot_plan_1.svg';
+      filename = `depot_plan_${lager}1.svg`;
       break;
     case 'level-2':
-      filename = 'depot_plan_2.svg';
+      filename = `depot_plan_${lager}2.svg`;
       break;
     case 'level-3':
-      filename = 'depot_plan_3.svg';
+      filename = `depot_plan_${lager}3.svg`;
       break;
   }
   depotPlanImage.setAttribute('src', `${baseUrl}${filename}`);
+  setTimeout(function () { document.querySelectorAll('[type="checkbox"]').forEach(checkbox => displayTypesOfGoods(checkbox));}, 50);
 }
 
 function changeAccountMode() {
@@ -65,6 +88,10 @@ function changeAccountMode() {
     var baseUrl = accountIcon.getAttribute('data-base-url');
     accountIcon.setAttribute('src', `${baseUrl}account_bold.svg`);
     accountIcon.setAttribute('alt', 'Login');
+    document.getElementById('account-button').setAttribute('data-bs-title', 'Login');
+    document.querySelector('.left_params').style.display = 'none';
+    document.querySelector('.handle').style.display = 'none';
+    document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button') && bt.id != 'account-button') { bt.setAttribute('disabled', 'true'); } });
   } else {
     var login = document.querySelector('.login');
     login.style.display = (login.style.display === 'none' || login.style.display === '') ? 'flex' : 'none';
@@ -79,8 +106,13 @@ function login() {
     var baseUrl = accountIcon.getAttribute('data-base-url');
     accountIcon.setAttribute('src', `${baseUrl}logout_bold.svg`);
     accountIcon.setAttribute('alt', 'Logout');
+    document.getElementById('account-button').setAttribute('data-bs-title', 'Logout');
     var login = document.querySelector('.login');
     login.style.display = 'none';
+    document.querySelector('.left_params').style.display = 'flex';
+    document.querySelector('.handle').style.display = 'flex';
+    document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button')) { bt.removeAttribute('disabled'); } });
+
   }
   email.value = '';
   password.value = '';
@@ -135,11 +167,30 @@ function createDelivery(button) {
                               <p>Datum: ${date.value}</p>
                               <p>Temp.: ${temp.value} °C</p>
                           </div>
-                          <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                          <button class="btn btn-primary" type="button" onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
                         </div>`;
   closeDeliveryForm();
 }
 
+function sortByDateASC(button) {
+  var content = (button.parentElement.id == "receipt") ? document.getElementById('collapseReceiptContent') : document.getElementById('collapseSendContent');
+  const deliveries = content.getElementsByClassName('delivery');
+  deliveries.sort(function (a, b) { Date(a.getElementById('date').innerText.split(' ')) - Date(b.getElementById('date').innerText.split(' ')) });
+}
+
+function sortByDateDES(button) {
+  var content = (button.parentElement.id == "receipt") ? document.getElementById('collapseReceiptContent') : document.getElementById('collapseSendContent');
+  const deliveries = content.getElementsByClassName('delivery');
+  deliveries.sort(function (a, b) { Date(b.getElementById('date').innerText.split(' ')) - Date(a.getElementById('date').innerText.split(' ')) });
+}
+
+function lieferscheinInNewTab(pdfUrl) {
+  if (pdfUrl && typeof pdfUrl === 'string') {
+    window.open(pdfUrl, '_blank');
+  } else {
+    console.error('Ungültige PDF-URL');
+  }
+}
 
 const leftParams = document.querySelector('.left_params');
 const handle = document.querySelector('.handle');

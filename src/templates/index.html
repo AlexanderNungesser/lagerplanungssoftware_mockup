@@ -16,14 +16,35 @@
     <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
         <a class="navbar-brand" href="/">
             <img src="{{ url_for('static', filename= 'images/SmartDepot_bold.svg') }}" width="25" height="25"
-                class="d-inline-block align-top" alt="Logo">
+                class="d-inline-block align-top" alt="Logo" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-title="SmartDepot">
         </a>
 
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypes"
+            aria-expanded="false" aria-controls="collapseTypes" >
+            <span data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-title="Nach Typen Filtern">Warentypen</span>
+        </button>
+
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceipt"
+            aria-expanded="false" aria-controls="collapseReceipt" >
+            <span data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-title="Alle Ankommenden Lieferungen">Wareneingang</span>
+        </button>
+
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSend"
+            aria-expanded="false" aria-controls="collapseSend" >
+            <span data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-title="Alle Herausgehenden Lieferungen">Warenausgang</span>
+        </button>
+
         <div class="top-params">
+
             <div class="dropdown">
-                <button id="dropdown-lager" class="btn btn-primary dropdown-toggle" type="button"
+                <button class="btn btn-primary dropdown-toggle" type="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    Lager
+                    <span id="dropdown-lager" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        data-bs-title="Lager Auswählen">Lager A</span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdown-lager">
                     <li><a class="dropdown-item" href="#" onclick="changeDropdownLager(this)">Lager A</a></li>
@@ -32,7 +53,7 @@
                 </ul>
                 <button id="dropdown-werk" class="btn btn-primary dropdown-toggle" type="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    Werk
+                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Werk Auswählen">Werk A</span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdown-werk">
                     <li><a class="dropdown-item" href="#" onclick="changeDropdownWerk(this)">Werk A</a></li>
@@ -40,7 +61,9 @@
                     <li><a class="dropdown-item" href="#" onclick="changeDropdownWerk(this)">Werk C</a></li>
                 </ul>
             </div>
-            <button id="account-button" type="button" class="btn btn-primary" onclick="changeAccountMode()">
+
+            <button id="account-button" type="button" class="btn btn-primary" onclick="changeAccountMode()"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Login">
                 <img id="account-icon" src="{{ url_for('static', filename= 'images/account_bold.svg') }}" alt="Login"
                     width="25" height="25" data-base-url="{{ url_for('static', filename='images/') }}">
             </button>
@@ -48,12 +71,8 @@
     </header>
     <main>
         <div class="left_params">
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypes"
-                aria-expanded="false" aria-controls="collapseTypes">
-                Warentypen
-            </button>
 
-            <div class="collapse" id="collapseTypes">
+            <div class="collapse" id="collapseTypes" data-bs-parent=".left_params">
                 <div class="card card-body">
 
                     <div class="form-check">
@@ -91,14 +110,10 @@
 
                 </div>
             </div>
-            <p></p>
 
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceipt"
-                aria-expanded="false" aria-controls="collapseReceipt">
-                Wareneingang
-            </button>
-
-            <div class="collapse" id="collapseReceipt">
+            <div class="collapse" id="collapseReceipt" data-bs-parent=".left_params">
+                <button class="btn btn-primary" type="button" onclick="sortByDateDES(this)">↑ Datum</button>
+                <button class="btn btn-primary" type="button" onclick="sortByDateASC(this)">↓ Datum</button>
                 <div class="card card-body">
                     <div id="collapseReceiptContent">
                         <div class="card card-body delivery">
@@ -108,10 +123,11 @@
                             </div>
                             <div class="content">
                                 <p>Paletten: 1</p>
-                                <p>Datum: 2024-07-17</p>
+                                <p id="date">Datum: 2024-07-17</p>
                                 <p>Temp.: -20 °C</p>
                             </div>
-                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                            <button class="btn btn-primary" type="button"
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
                         </div>
                         <div class="card card-body delivery">
                             <div class="header">
@@ -120,10 +136,11 @@
                             </div>
                             <div class="content">
                                 <p>Paletten: 1</p>
-                                <p>Datum: 2024-07-17</p>
+                                <p id="date">Datum: 2024-07-17</p>
                                 <p>Temp.: -20 °C</p>
                             </div>
-                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                            <button class="btn btn-primary" type="button"
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
                         </div>
                         <div class="card card-body delivery">
                             <div class="header">
@@ -132,24 +149,21 @@
                             </div>
                             <div class="content">
                                 <p>Paletten: 1</p>
-                                <p>Datum: 2024-07-17</p>
+                                <p id="date">Datum: 2024-07-17</p>
                                 <p>Temp.: -20 °C</p>
                             </div>
-                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                            <button class="btn btn-primary" type="button"
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="button" onclick="displayDeliveryForm('receipt')">Lieferung
                         Hinzufügen</button>
                 </div>
             </div>
-            <p></p>
 
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSend"
-                aria-expanded="false" aria-controls="collapseSend">
-                Warenausgang
-            </button>
-
-            <div class="collapse" id="collapseSend">
+            <div class="collapse" id="collapseSend" data-bs-parent=".left_params">
+                <button class="btn btn-primary" type="button" onclick="sortByDateDES(this)">↑ Datum</button>
+                <button class="btn btn-primary" type="button" onclick="sortByDateASC(this)">↓ Datum</button>
                 <div class="card card-body">
                     <div id="collapseSendContent">
                         <div class="card card-body delivery">
@@ -159,10 +173,11 @@
                             </div>
                             <div class="content">
                                 <p>Paletten: 1</p>
-                                <p>Datum: 2024-07-17</p>
+                                <p id="date">Datum: 2024-07-17</p>
                                 <p>Temp.: -20 °C</p>
                             </div>
-                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                            <button class="btn btn-primary" type="button"
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
                         </div>
                         <div class="card card-body delivery">
                             <div class="header">
@@ -171,10 +186,11 @@
                             </div>
                             <div class="content">
                                 <p>Paletten: 1</p>
-                                <p>Datum: 2024-07-17</p>
+                                <p id="date">Datum: 2024-07-17</p>
                                 <p>Temp.: -20 °C</p>
                             </div>
-                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                            <button class="btn btn-primary" type="button"
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
                         </div>
                         <div class="card card-body delivery">
                             <div class="header">
@@ -183,10 +199,11 @@
                             </div>
                             <div class="content">
                                 <p>Paletten: 1</p>
-                                <p>Datum: 2024-07-17</p>
+                                <p id="date">Datum: 2024-07-17</p>
                                 <p>Temp.: -20 °C</p>
                             </div>
-                            <button class="btn btn-primary" type="button" onclick="">Lieferschein</button>
+                            <button class="btn btn-primary" type="button"
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="button" onclick="displayDeliveryForm('send')">Lieferung
@@ -198,16 +215,19 @@
         <div class="handle left-handle"></div>
 
         <div class="working_area">
-            <iframe id="depot-plan" src="{{ url_for('static', filename= 'images/depot_plan_1.svg') }}" alt="Depot"
+            <iframe id="depot-plan" src="{{ url_for('static', filename= 'images/depot_plan_A1.svg') }}" alt="Depot"
                 data-base-url="{{ url_for('static', filename='images/') }}"></iframe>
         </div>
 
         <div class="levels">
-            <button id="level-1" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)">Level
+            <button id="level-1" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)" data-bs-toggle="tooltip" data-bs-placement="left"
+                data-bs-title="Ändere das Level des Lagers">Level
                 1</button>
-            <button id="level-2" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)">Level
+            <button id="level-2" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)" data-bs-toggle="tooltip" data-bs-placement="left"
+                data-bs-title="Ändere das Level des Lagers">Level
                 2</button>
-            <button id="level-3" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)">Level
+            <button id="level-3" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)" data-bs-toggle="tooltip" data-bs-placement="left"
+                data-bs-title="Ändere das Level des Lagers">Level
                 3</button>
         </div>
 
@@ -245,7 +265,7 @@
                 </h6>
                 <h6 class="card-title">
                     <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="floatingCharge" min="10000">
+                        <input type="number" class="form-control" id="floatingCharge" min="10000" max="99999">
                         <label for="floatingCharge">Charge-Nr</label>
                     </div>
                 </h6>
@@ -270,6 +290,12 @@
                 </div>
                 </p>
             </div>
+            <p>
+            <div class="form-floating h-5">
+                <input type="text" class="form-control" id="floatingText">
+                <label for="floatingText">Weitere Notizen</label>
+            </div>
+            </p>
             <button class="btn btn-primary" type="button" onclick="createDelivery(this)">Lieferung Anlegen</button>
         </div>
 
