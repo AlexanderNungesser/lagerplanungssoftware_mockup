@@ -1,6 +1,20 @@
 function updateTooltips() {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => {
+    const tooltip = new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' });
+
+    // Fügt einen Event-Listener hinzu, um den Tooltip auszublenden, wenn das Element den Fokus verliert
+    tooltipTriggerEl.addEventListener('blur', () => {
+      tooltip.hide();
+    });
+
+    // Optional: Tooltip auch ausblenden, wenn das Element angeklickt wird
+    tooltipTriggerEl.addEventListener('click', () => {
+      tooltip.hide();
+    });
+
+    return tooltip;
+  })
 }
 
 document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button')) { bt.setAttribute('disabled', 'true'); } });
@@ -54,27 +68,27 @@ const depot_plan_A1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.1</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.1</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.1</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.1</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.1</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="760" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G6.1</text>
-  <rect x="760" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -122,7 +136,7 @@ const depot_plan_A1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
   <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.1</text>
   <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
-</svg>;`
+</svg>`;
 const depot_plan_A2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
@@ -172,27 +186,27 @@ const depot_plan_A2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.2</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.2</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.2</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.2</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.2</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="760" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G6.2</text>
-  <rect x="760" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -290,27 +304,27 @@ const depot_plan_A3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.3</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.3</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.3</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.3</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.3</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="760" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G6.3</text>
-  <rect x="760" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -407,28 +421,28 @@ const depot_plan_B1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
       data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
 
       <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.1</text>
-  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="70" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.1</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.1</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.1</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.1</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.1</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -525,28 +539,28 @@ const depot_plan_B2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
       data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
 
       <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.2</text>
-  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="70" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.2</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.2</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.2</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.2</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.2</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -643,28 +657,28 @@ const depot_plan_B3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
       data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
 
       <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.3</text>
-  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="70" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.3</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.3</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.3</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.3</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.3</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -761,28 +775,28 @@ const depot_plan_C1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
     data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
 
   <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.1</text>
-  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="70" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.1</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.1</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.1</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.1</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.1</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -880,28 +894,28 @@ const depot_plan_C2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
     data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
 
   <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.2</text>
-  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="70" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.2</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.2</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.2</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.2</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.2</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -999,28 +1013,28 @@ const depot_plan_C3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
     data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
 
   <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.3</text>
-  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="760" y="70" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Giftige Waren -->
   <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.3</text>
-  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="60" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.3</text>
-  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="200" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.3</text>
-  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="340" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.3</text>
-  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="480" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.3</text>
-  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+  <rect x="620" y="240" width="120" height="50" fill="green" stroke="#000" data-bs-toggle="tooltip"
     data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
 
   <!-- Lagerplätze für Explosionsgeschützt -->
@@ -1179,7 +1193,7 @@ function changeAccountMode() {
 function login() {
   var email = document.getElementById('floatingEmail');
   var password = document.getElementById('floatingPassword');
-  if (email.value == 'admin@smartdepot.com' && password.value == 'admin') {
+  if (email.value == 'a' && password.value == 'a') {
     var accountIcon = document.getElementById('account-icon');
     var baseUrl = accountIcon.getAttribute('data-base-url');
     accountIcon.setAttribute('src', `${baseUrl}logout_bold.svg`);
@@ -1293,6 +1307,7 @@ function einlagern(button) {
     values.push(p.innerHTML.split(' ')[1]);
   });
 
+  freeSlotClicked.setAttribute('fill', 'green');
   freeSlotClicked.setAttribute('data-bs-title', values.join(' '));
   freeSlotClicked.setAttribute('onclick', 'occupiedSlot(this)');
 
@@ -1322,7 +1337,8 @@ function occupiedSlot(slot) {
 function auslagern(button) {
   occupiedSlotClicked.setAttribute('data-bs-title', 'Frei');
   occupiedSlotClicked.setAttribute('onclick', 'freeSlot(this)');
-  
+  occupiedSlotClicked.setAttribute('fill', 'green');
+
   updateTooltips();
   button.style.display = 'none';
 }
