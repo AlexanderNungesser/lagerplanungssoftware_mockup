@@ -60,16 +60,21 @@ main {
 }
 
 .left_params {
-    display: none;
+    display: flex;
     flex-direction: column;
-    min-width: 300px;
-    width: 500px;
+    min-width: 425px;
+    width: 425px;
     max-width: 75%;
     height: 100%;
     z-index: 2;
     background-color: var(--smartdepot-grey);
     border-radius: 5px;
     overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#auslagern-button{
+    display: none;
 }
 
 .header {
@@ -99,12 +104,12 @@ main {
     z-index: 9;
 }
 
-.delivery{
+.delivery {
     margin-bottom: 5px;
 }
 
 .handle {
-    display: none;
+    display: flex;
     flex-direction: column;
     min-width: 2.5px;
     max-width: 2.5px;
@@ -112,11 +117,13 @@ main {
     flex: 0 0 auto;
     height: 98%;
     align-self: center;
+    padding: 0;
+    cursor: col-resize;
 }
 
 .handle:hover {
     background-color: var(--smartdepot-blue);
-    cursor: col-resize;
+
 }
 
 .working_area {
@@ -127,13 +134,24 @@ main {
     z-index: 2;
     flex: 1 1 auto;
     padding-right: 1%;
-    background-color: #ffffff;
+    box-sizing: border-box;
 }
 
 #depot-plan {
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
+    z-index: 2;
+}
+
+svg {
+    display: flex;
+    width: auto;
+    height: 100%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    z-index: 2;
 }
 
 .levels {

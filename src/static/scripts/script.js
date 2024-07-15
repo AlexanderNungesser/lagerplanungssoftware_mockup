@@ -1,27 +1,1095 @@
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+function updateTooltips() {
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+}
+
 document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button')) { bt.setAttribute('disabled', 'true'); } });
 
+const depot_plan_A1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.1</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+      data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+      data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)"/>
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.1</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.1</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.1</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.1</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.1</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.1</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.1</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.1</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.1</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="760" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G6.1</text>
+  <rect x="760" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.1</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.1</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.1</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.1</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.1</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX6.1</text>
+  <rect x="760" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.1</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.1</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.1</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.1</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.1</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+</svg>;`
+const depot_plan_A2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.2</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+      data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+      data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)"/>
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.2</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.2</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.2</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.2</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.2</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.2</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.2</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.2</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.2</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="760" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G6.2</text>
+  <rect x="760" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.2</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.2</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.2</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.2</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.2</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX6.2</text>
+  <rect x="760" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.2</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.2</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.2</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.2</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.2</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+</svg>`;
+const depot_plan_A3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.3</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+      data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+      data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)"/>
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.3</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.3</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.3</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.3</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.3</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.3</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.3</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.3</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.3</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="760" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G6.3</text>
+  <rect x="760" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.3</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.3</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.3</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.3</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.3</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX6.3</text>
+  <rect x="760" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.3</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.3</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.3</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.3</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.3</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+</svg>`;
+const depot_plan_B1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.1</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+      data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+      data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)"/>
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.1</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.1</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.1</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.1</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+      <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.1</text>
+  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.1</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.1</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.1</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.1</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.1</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.1</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.1</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.1</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.1</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.1</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.1</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.1</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.1</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.1</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.1</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+      <text x="760" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM6.1</text>
+      <rect x="760" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+</svg>`;
+const depot_plan_B2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.2</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+      data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+      data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)"/>
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.2</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.2</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.2</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.2</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+      <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.2</text>
+  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.2</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.2</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.2</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.2</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.2</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.2</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.2</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.2</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.2</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.2</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.2</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.2</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.2</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.2</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.2</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+      <text x="760" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM6.2</text>
+      <rect x="760" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+</svg>`;
+const depot_plan_B3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.3</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+      data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+      data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)"/>
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.3</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.3</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.3</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.3</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+      <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.3</text>
+  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.3</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.3</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.3</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.3</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.3</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.3</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.3</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.3</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.3</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.3</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.3</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.3</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.3</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.3</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.3</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+      data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+      <text x="760" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM6.3</text>
+      <rect x="760" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+</svg>`;
+const depot_plan_C1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.1</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+    data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+    data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.1</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.1</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.1</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.1</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.1</text>
+  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.1</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.1</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.1</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.1</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.1</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.1</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.1</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.1</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.1</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.1</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX6.1</text>
+  <rect x="760" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.1</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.1</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.1</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.1</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.1</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+</svg>`;
+const depot_plan_C2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.2</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+    data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+    data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.2</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.2</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.2</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.2</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.2</text>
+  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.2</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.2</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.2</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.2</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.2</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.2</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.2</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.2</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.2</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.2</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX6.2</text>
+  <rect x="760" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.2</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.2</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.2</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.2</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.2</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+</svg>`;
+const depot_plan_C3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hintergrund -->
+  <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+  <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+  <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+  <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Kühl</text> -->
+
+  <!-- Bereich: Giftige Waren fill="#FF6347"-->
+  <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+  <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Giftig</text> -->
+
+  <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+  <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+  <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Explosiv</text> -->
+
+  <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+  <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+  <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+  text-anchor="middle">Betäubungsmittel</text> -->
+
+  <!-- Lagerplätze für Gekühlte Waren -->
+  <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.3</text>
+  <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+    data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+    data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+
+  <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.3</text>
+  <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.3</text>
+  <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.3</text>
+  <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.3</text>
+  <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K6.3</text>
+  <rect x="760" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Giftige Waren -->
+  <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.3</text>
+  <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.3</text>
+  <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.3</text>
+  <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.3</text>
+  <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.3</text>
+  <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+  <!-- Lagerplätze für Explosionsgeschützt -->
+  <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.3</text>
+  <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.3</text>
+  <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.3</text>
+  <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.3</text>
+  <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.3</text>
+  <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="760" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX6.3</text>
+  <rect x="760" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <!-- Lagerplätze für Betäubungsmittel -->
+  <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.3</text>
+  <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.3</text>
+  <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.3</text>
+  <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.3</text>
+  <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+  <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.3</text>
+  <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+
+</svg>`;
+
 function displayTypesOfGoods(checkbox) {
-  var iframe = document.getElementById("depot-plan");
-  var content = iframe.contentDocument || iframe.contentWindow.document;
+  var plan = document.getElementById("depot-plan");
   var area;
   var fill;
   switch (checkbox.id.split(' ')[1]) {
     case 'kalt':
-      area = content.getElementById("kalt");
+      area = plan.querySelector("#kalt");
       fill = "#ADD8E6";
       break;
     case 'gift':
-      area = content.getElementById("gift");
+      area = plan.querySelector("#gift");
       fill = "#FF6347";
       break;
     case 'explosiv':
-      area = content.getElementById("explosiv");
+      area = plan.querySelector("#explosiv");
       fill = "#FFD700";
       break;
     case 'btm':
-      area = content.getElementById("btm");
+      area = plan.querySelector("#btm");
       fill = "#98FB98";
       break;
     default:
@@ -43,43 +1111,55 @@ function changeDropdownWerk(element) {
 function changeDropdownLager(element) {
   var dropdownButton = document.getElementById('dropdown-lager');
   dropdownButton.textContent = element.textContent;
-  var depotPlanImage = document.getElementById('depot-plan');
-  var baseUrl = depotPlanImage.getAttribute('data-base-url');
-  var filename = '';
+  var plan = document.getElementById('depot-plan');
+
   switch (element.textContent) {
     case 'Lager A':
-      filename = `depot_plan_A1.svg`;
+      plan.innerHTML = depot_plan_A1;
       break;
     case 'Lager B':
-      filename = `depot_plan_B1.svg`;
+      plan.innerHTML = depot_plan_B1;
       break;
     case 'Lager C':
-      filename = `depot_plan_C1.svg`;
+      plan.innerHTML = depot_plan_C1;
       break;
   }
-  depotPlanImage.setAttribute('src', `${baseUrl}${filename}`);
-  setTimeout(function () { document.querySelectorAll('[type="checkbox"]').forEach(checkbox => displayTypesOfGoods(checkbox));}, 50);
+  document.querySelectorAll('[type="checkbox"]').forEach(checkbox => displayTypesOfGoods(checkbox));
+  updateTooltips();
 }
 
 function changeDepotPlanLevel(element) {
-  var depotPlanImage = document.getElementById('depot-plan');
-  var baseUrl = depotPlanImage.getAttribute('data-base-url');
+  var plan = document.getElementById('depot-plan');
   var lager = document.getElementById('dropdown-lager').textContent.split(' ')[1];
+  const plans = [[depot_plan_A1, depot_plan_A2, depot_plan_A3], [depot_plan_B1, depot_plan_B2, depot_plan_B3], [depot_plan_C1, depot_plan_C2, depot_plan_C3]];
 
-  var filename = '';
-  switch (element.id) {
-    case 'level-1':
-      filename = `depot_plan_${lager}1.svg`;
+  var tmp;
+
+  switch (lager) {
+    case 'A':
+      tmp = plans[0];
       break;
-    case 'level-2':
-      filename = `depot_plan_${lager}2.svg`;
+    case 'B':
+      tmp = plans[1];
       break;
-    case 'level-3':
-      filename = `depot_plan_${lager}3.svg`;
+    case 'C':
+      tmp = plans[2];
       break;
   }
-  depotPlanImage.setAttribute('src', `${baseUrl}${filename}`);
-  setTimeout(function () { document.querySelectorAll('[type="checkbox"]').forEach(checkbox => displayTypesOfGoods(checkbox));}, 50);
+
+  switch (element.id) {
+    case 'level-1':
+      plan.innerHTML = tmp[0];
+      break;
+    case 'level-2':
+      plan.innerHTML = tmp[1];
+      break;
+    case 'level-3':
+      plan.innerHTML = tmp[2];
+      break;
+  }
+  document.querySelectorAll('[type="checkbox"]').forEach(checkbox => displayTypesOfGoods(checkbox));
+  updateTooltips();
 }
 
 function changeAccountMode() {
@@ -89,8 +1169,6 @@ function changeAccountMode() {
     accountIcon.setAttribute('src', `${baseUrl}account_bold.svg`);
     accountIcon.setAttribute('alt', 'Login');
     document.getElementById('account-button').setAttribute('data-bs-title', 'Login');
-    document.querySelector('.left_params').style.display = 'none';
-    document.querySelector('.handle').style.display = 'none';
     document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button') && bt.id != 'account-button') { bt.setAttribute('disabled', 'true'); } });
   } else {
     var login = document.querySelector('.login');
@@ -109,10 +1187,8 @@ function login() {
     document.getElementById('account-button').setAttribute('data-bs-title', 'Logout');
     var login = document.querySelector('.login');
     login.style.display = 'none';
-    document.querySelector('.left_params').style.display = 'flex';
-    document.querySelector('.handle').style.display = 'flex';
     document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button')) { bt.removeAttribute('disabled'); } });
-
+    updateTooltips();
   }
   email.value = '';
   password.value = '';
@@ -172,24 +1248,83 @@ function createDelivery(button) {
   closeDeliveryForm();
 }
 
-function sortByDateASC(button) {
-  var content = (button.parentElement.id == "receipt") ? document.getElementById('collapseReceiptContent') : document.getElementById('collapseSendContent');
-  const deliveries = content.getElementsByClassName('delivery');
-  deliveries.sort(function (a, b) { Date(a.getElementById('date').innerText.split(' ')) - Date(b.getElementById('date').innerText.split(' ')) });
-}
-
-function sortByDateDES(button) {
-  var content = (button.parentElement.id == "receipt") ? document.getElementById('collapseReceiptContent') : document.getElementById('collapseSendContent');
-  const deliveries = content.getElementsByClassName('delivery');
-  deliveries.sort(function (a, b) { Date(b.getElementById('date').innerText.split(' ')) - Date(a.getElementById('date').innerText.split(' ')) });
-}
-
 function lieferscheinInNewTab(pdfUrl) {
   if (pdfUrl && typeof pdfUrl === 'string') {
     window.open(pdfUrl, '_blank');
   } else {
     console.error('Ungültige PDF-URL');
   }
+}
+
+var freeClicked = false;
+var freeSlotClicked;
+
+
+function freeSlot(slot) {
+  freeSlotClicked = slot;
+  if (!freeClicked) {
+    document.querySelector('#collapseReceiptContent').querySelectorAll('button').forEach(bt => {
+      bt.innerHTML = 'Einlagern';
+      bt.setAttribute('onclick', 'einlagern(this)');
+      bt.setAttribute('data-bs-title', 'Einlagern der Lieferung in den freien Lagerplatz');
+    });
+    updateTooltips();
+    freeClicked = true;
+  } else {
+    document.querySelector('#collapseReceiptContent').querySelectorAll('button').forEach(bt => {
+      bt.innerHTML = 'Lieferschein';
+      bt.setAttribute('onclick', "lieferscheinInNewTab('.static/Lieferschein.pdf')");
+    });
+    freeClicked = false;
+  }
+}
+
+
+function einlagern(button) {
+  var delivery = button.parentElement;
+  delivery.style.display = "none";
+
+  let values = [];
+  delivery.querySelectorAll('h6').forEach(h => {
+    values.push(h.innerHTML);
+  });
+
+  delivery.querySelectorAll('p').forEach(p => {
+    values.push(p.innerHTML.split(' ')[1]);
+  });
+
+  freeSlotClicked.setAttribute('data-bs-title', values.join(' '));
+  freeSlotClicked.setAttribute('onclick', 'occupiedSlot(this)');
+
+  document.querySelector('#collapseReceiptContent').querySelectorAll('button').forEach(bt => {
+    bt.innerHTML = 'Lieferschein';
+    bt.setAttribute('onclick', "lieferscheinInNewTab('.static/Lieferschein.pdf')");
+  });
+  freeClicked = false;
+
+  updateTooltips();
+}
+
+var occupiedClicked = false;
+var occupiedSlotClicked;
+
+function occupiedSlot(slot) {
+  occupiedSlotClicked = slot;
+  if (!occupiedClicked) {
+    document.getElementById('auslagern-button').style.display = 'flex';
+    occupiedClicked = true;
+  } else {
+    document.getElementById('auslagern-button').style.display = 'none';
+    occupiedClicked = false;
+  }
+}
+
+function auslagern(button) {
+  occupiedSlotClicked.setAttribute('data-bs-title', 'Frei');
+  occupiedSlotClicked.setAttribute('onclick', 'freeSlot(this)');
+  
+  updateTooltips();
+  button.style.display = 'none';
 }
 
 const leftParams = document.querySelector('.left_params');
@@ -201,13 +1336,14 @@ handle.addEventListener('mousedown', function (e) {
   isResizing = true;
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
+
 });
 
 function onMouseMove(e) {
   if (!isResizing) return;
 
   const newWidth = e.clientX;
-  if (newWidth < 100 || newWidth > window.innerWidth * 0.5) return;
+  if (newWidth <= 100 || newWidth >= window.innerWidth * 0.5) return;
 
   leftParams.style.width = `${newWidth}px`;
   handle.style.left = `${newWidth}px`;

@@ -21,19 +21,19 @@
         </a>
 
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypes"
-            aria-expanded="false" aria-controls="collapseTypes" >
+            aria-expanded="false" aria-controls="collapseTypes">
             <span data-bs-toggle="tooltip" data-bs-placement="bottom"
                 data-bs-title="Nach Typen Filtern">Warentypen</span>
         </button>
 
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceipt"
-            aria-expanded="false" aria-controls="collapseReceipt" >
+            aria-expanded="false" aria-controls="collapseReceipt">
             <span data-bs-toggle="tooltip" data-bs-placement="bottom"
                 data-bs-title="Alle Ankommenden Lieferungen">Wareneingang</span>
         </button>
 
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSend"
-            aria-expanded="false" aria-controls="collapseSend" >
+            aria-expanded="false" aria-controls="collapseSend">
             <span data-bs-toggle="tooltip" data-bs-placement="bottom"
                 data-bs-title="Alle Herausgehenden Lieferungen">Warenausgang</span>
         </button>
@@ -41,8 +41,8 @@
         <div class="top-params">
 
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     <span id="dropdown-lager" data-bs-toggle="tooltip" data-bs-placement="bottom"
                         data-bs-title="Lager Auswählen">Lager A</span>
                 </button>
@@ -53,7 +53,8 @@
                 </ul>
                 <button id="dropdown-werk" class="btn btn-primary dropdown-toggle" type="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Werk Auswählen">Werk A</span>
+                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Werk Auswählen">Werk
+                        A</span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdown-werk">
                     <li><a class="dropdown-item" href="#" onclick="changeDropdownWerk(this)">Werk A</a></li>
@@ -112,8 +113,9 @@
             </div>
 
             <div class="collapse" id="collapseReceipt" data-bs-parent=".left_params">
-                <button class="btn btn-primary" type="button" onclick="sortByDateDES(this)">↑ Datum</button>
-                <button class="btn btn-primary" type="button" onclick="sortByDateASC(this)">↓ Datum</button>
+                <button class="btn btn-primary" type="button">↑ Datum</button>
+                <button class="btn btn-primary" type="button">↓ Datum</button>
+                
                 <div class="card card-body">
                     <div id="collapseReceiptContent">
                         <div class="card card-body delivery">
@@ -124,10 +126,11 @@
                             <div class="content">
                                 <p>Paletten: 1</p>
                                 <p id="date">Datum: 2024-07-17</p>
-                                <p>Temp.: -20 °C</p>
+                                <p>Temp.: -20°C</p>
                             </div>
                             <button class="btn btn-primary" type="button"
-                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Lieferschein drucken">Lieferschein</button>
                         </div>
                         <div class="card card-body delivery">
                             <div class="header">
@@ -137,10 +140,11 @@
                             <div class="content">
                                 <p>Paletten: 1</p>
                                 <p id="date">Datum: 2024-07-17</p>
-                                <p>Temp.: -20 °C</p>
+                                <p>Temp.: -20°C</p>
                             </div>
                             <button class="btn btn-primary" type="button"
-                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Lieferschein drucken">Lieferschein</button>
                         </div>
                         <div class="card card-body delivery">
                             <div class="header">
@@ -150,10 +154,11 @@
                             <div class="content">
                                 <p>Paletten: 1</p>
                                 <p id="date">Datum: 2024-07-17</p>
-                                <p>Temp.: -20 °C</p>
+                                <p>Temp.: -20°C</p>
                             </div>
                             <button class="btn btn-primary" type="button"
-                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Lieferschein drucken">Lieferschein</button>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="button" onclick="displayDeliveryForm('receipt')">Lieferung
@@ -162,8 +167,11 @@
             </div>
 
             <div class="collapse" id="collapseSend" data-bs-parent=".left_params">
-                <button class="btn btn-primary" type="button" onclick="sortByDateDES(this)">↑ Datum</button>
-                <button class="btn btn-primary" type="button" onclick="sortByDateASC(this)">↓ Datum</button>
+                <button class="btn btn-primary" type="button">↑ Datum</button>
+                <button class="btn btn-primary" type="button">↓ Datum</button>
+                <button id="auslagern-button" onclick="auslagern(this)" class="btn btn-primary" type="button"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    data-bs-title="Auslagern eins belegten Lagerplatzes">Auslagern</button>
                 <div class="card card-body">
                     <div id="collapseSendContent">
                         <div class="card card-body delivery">
@@ -174,10 +182,11 @@
                             <div class="content">
                                 <p>Paletten: 1</p>
                                 <p id="date">Datum: 2024-07-17</p>
-                                <p>Temp.: -20 °C</p>
+                                <p>Temp.: -20°C</p>
                             </div>
                             <button class="btn btn-primary" type="button"
-                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Lieferschein drucken">Lieferschein</button>
                         </div>
                         <div class="card card-body delivery">
                             <div class="header">
@@ -187,10 +196,11 @@
                             <div class="content">
                                 <p>Paletten: 1</p>
                                 <p id="date">Datum: 2024-07-17</p>
-                                <p>Temp.: -20 °C</p>
+                                <p>Temp.: -20°C</p>
                             </div>
                             <button class="btn btn-primary" type="button"
-                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Lieferschein drucken">Lieferschein</button>
                         </div>
                         <div class="card card-body delivery">
                             <div class="header">
@@ -200,10 +210,11 @@
                             <div class="content">
                                 <p>Paletten: 1</p>
                                 <p id="date">Datum: 2024-07-17</p>
-                                <p>Temp.: -20 °C</p>
+                                <p>Temp.: -20°C</p>
                             </div>
                             <button class="btn btn-primary" type="button"
-                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')">Lieferschein</button>
+                                onclick="lieferscheinInNewTab('./static/Lieferschein.pdf')" data-bs-toggle="tooltip"
+                                data-bs-placement="right" data-bs-title="Lieferschein drucken">Lieferschein</button>
                         </div>
                     </div>
                     <button class="btn btn-primary" type="button" onclick="displayDeliveryForm('send')">Lieferung
@@ -215,19 +226,152 @@
         <div class="handle left-handle"></div>
 
         <div class="working_area">
-            <iframe id="depot-plan" src="{{ url_for('static', filename= 'images/depot_plan_A1.svg') }}" alt="Depot"
-                data-base-url="{{ url_for('static', filename='images/') }}"></iframe>
+            <div id="depot-plan" alt="Depot">
+                <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hintergrund -->
+                    <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
+
+                    <!-- Bereich: Gekühlte Waren fill="#ADD8E6"-->
+                    <rect x="10" y="10" width="980" height="160" fill="#fff" stroke="#000" id="kalt" />
+                    <!-- <text x="460" y="40" font-family="Arial" font-size="16" fill="#000"
+                    text-anchor="middle">Kühl</text> -->
+
+                    <!-- Bereich: Giftige Waren fill="#FF6347"-->
+                    <rect x="10" y="180" width="980" height="160" fill="#fff" stroke="#000" id="gift" />
+                    <!-- <text x="460" y="220" font-family="Arial" font-size="16" fill="#000"
+                    text-anchor="middle">Giftig</text> -->
+
+                    <!-- Bereich: Explosionsgeschützt fill="#FFD700"-->
+                    <rect x="10" y="350" width="980" height="160" fill="#fff" stroke="#000" id="explosiv" />
+                    <!-- <text x="460" y="400" font-family="Arial" font-size="16" fill="#000"
+                    text-anchor="middle">Explosiv</text> -->
+
+                    <!-- Bereich: Betäubungsmittel fill="#98FB98"-->
+                    <rect x="10" y="520" width="980" height="160" fill="#fff" stroke="#000" id="btm" />
+                    <!-- <text x="460" y="580" font-family="Arial" font-size="16" fill="#000"
+                    text-anchor="middle">Betäubungsmittel</text> -->
+
+                    <!-- Lagerplätze für Gekühlte Waren -->
+                    <text x="60" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K1.1</text>
+                    <rect class="lagerplatz" x="60" y="70" width="120" height="50" fill="#FFF" stroke="#000"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" dat-bs-html="true"
+                        data-bs-custom-class="custom-tooltip" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C" onclick="occupiedSlot(this)"/>
+
+
+                    <text x="200" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K2.1</text>
+                    <rect x="200" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C"
+                        onclick="occupiedSlot(this)" /> 
+
+                    <text x="340" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K3.1</text>
+                    <rect x="340" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="480" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K4.1</text>
+                    <rect x="480" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="620" y="60" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: K5.1</text>
+                    <rect x="620" y="70" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 -20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <!-- Lagerplätze für Giftige Waren -->
+                    <text x="60" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G1.1</text>
+                    <rect x="60" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+                    <text x="200" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G2.1</text>
+                    <rect x="200" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+                    <text x="340" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G3.1</text>
+                    <rect x="340" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+                    <text x="480" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G4.1</text>
+                    <rect x="480" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+                    <text x="620" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G5.1</text>
+                    <rect x="620" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+                    <text x="760" y="230" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: G6.1</text>
+                    <rect x="760" y="240" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Frei" onclick="freeSlot(this)" />
+
+                    <!-- Lagerplätze für Explosionsgeschützt -->
+                    <text x="60" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX1.1</text>
+                    <rect x="60" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="200" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX2.1</text>
+                    <rect x="200" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="340" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX3.1</text>
+                    <rect x="340" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="480" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX4.1</text>
+                    <rect x="480" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="620" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX5.1</text>
+                    <rect x="620" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="760" y="400" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: EX6.1</text>
+                    <rect x="760" y="410" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <!-- Lagerplätze für Betäubungsmittel -->
+                    <text x="60" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM1.1</text>
+                    <rect x="60" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="200" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM2.1</text>
+                    <rect x="200" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.1</text>
+                    <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.1</text>
+                    <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+
+                    <text x="620" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM5.1</text>
+                    <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C"
+                        onclick="occupiedSlot(this)" />
+                </svg>
+            </div>
         </div>
 
         <div class="levels">
-            <button id="level-1" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)" data-bs-toggle="tooltip" data-bs-placement="left"
-                data-bs-title="Ändere das Level des Lagers">Level
+            <button id="level-1" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)"
+                data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Ändere das Level des Lagers">Level
                 1</button>
-            <button id="level-2" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)" data-bs-toggle="tooltip" data-bs-placement="left"
-                data-bs-title="Ändere das Level des Lagers">Level
+            <button id="level-2" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)"
+                data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Ändere das Level des Lagers">Level
                 2</button>
-            <button id="level-3" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)" data-bs-toggle="tooltip" data-bs-placement="left"
-                data-bs-title="Ändere das Level des Lagers">Level
+            <button id="level-3" type="button" class="btn btn-primary" onclick="changeDepotPlanLevel(this)"
+                data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Ändere das Level des Lagers">Level
                 3</button>
         </div>
 
@@ -303,7 +447,6 @@
     <footer>
         <p>SmartDepot © 2024</p>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename= 'scripts/script.js') }}"></script>
 </body>
