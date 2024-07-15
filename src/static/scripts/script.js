@@ -19,7 +19,7 @@ function updateTooltips() {
 
 document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button')) { bt.setAttribute('disabled', 'true'); } });
 
-const depot_plan_A1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_A1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -137,7 +137,7 @@ const depot_plan_A1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
   <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 </svg>`;
-const depot_plan_A2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_A2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -255,7 +255,7 @@ const depot_plan_A2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
   <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 </svg>`;
-const depot_plan_A3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_A3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -373,7 +373,7 @@ const depot_plan_A3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
   <rect x="620" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
       data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 </svg>`;
-const depot_plan_B1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_B1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -491,7 +491,7 @@ const depot_plan_B1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
       <rect x="760" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
           data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 </svg>`;
-const depot_plan_B2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_B2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -609,7 +609,7 @@ const depot_plan_B2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
       <rect x="760" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
           data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 </svg>`;
-const depot_plan_B3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_B3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -727,7 +727,7 @@ const depot_plan_B3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
       <rect x="760" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
           data-bs-placement="bottom" data-bs-title="Bezeichnung 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 </svg>`;
-const depot_plan_C1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_C1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -846,7 +846,7 @@ const depot_plan_C1 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
     data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 
 </svg>`;
-const depot_plan_C2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_C2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -965,7 +965,7 @@ const depot_plan_C2 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
     data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 
 </svg>`;
-const depot_plan_C3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+let depot_plan_C3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
   <!-- Hintergrund -->
   <!-- <rect width="100%" height="100%" fill="#d7d7d7" /> -->
 
@@ -1086,7 +1086,7 @@ const depot_plan_C3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000
 </svg>`;
 
 function displayTypesOfGoods(checkbox) {
-  var plan = document.getElementById("depot-plan");
+  var plan = document.querySelector(".depot-plan");
   var area;
   var fill;
   switch (checkbox.id.split(' ')[1]) {
@@ -1125,55 +1125,101 @@ function changeDropdownWerk(element) {
 function changeDropdownLager(element) {
   var dropdownButton = document.getElementById('dropdown-lager');
   dropdownButton.textContent = element.textContent;
-  var plan = document.getElementById('depot-plan');
+  var plan = document.querySelector('.depot-plan');
 
   switch (element.textContent) {
     case 'Lager A':
       plan.innerHTML = depot_plan_A1;
+      plan.id = 'depot_plan_A1';
       break;
     case 'Lager B':
       plan.innerHTML = depot_plan_B1;
+      plan.id = 'depot_plan_B1';
       break;
     case 'Lager C':
       plan.innerHTML = depot_plan_C1;
+      plan.id = 'depot_plan_C1';
       break;
   }
   document.querySelectorAll('[type="checkbox"]').forEach(checkbox => displayTypesOfGoods(checkbox));
   updateTooltips();
 }
 
-function changeDepotPlanLevel(element) {
-  var plan = document.getElementById('depot-plan');
-  var lager = document.getElementById('dropdown-lager').textContent.split(' ')[1];
-  const plans = [[depot_plan_A1, depot_plan_A2, depot_plan_A3], [depot_plan_B1, depot_plan_B2, depot_plan_B3], [depot_plan_C1, depot_plan_C2, depot_plan_C3]];
 
-  var tmp;
+function changeDepotPlanLevel(element) {
+  var plans = [[depot_plan_A1, depot_plan_A2, depot_plan_A3], [depot_plan_B1, depot_plan_B2, depot_plan_B3], [depot_plan_C1, depot_plan_C2, depot_plan_C3]];
+  var ids = [['depot_plan_A1', 'depot_plan_A2', 'depot_plan_A3'], ['depot_plan_B1', 'depot_plan_B2', 'depot_plan_B3'], ['depot_plan_C1', 'depot_plan_C2', 'depot_plan_C3']];
+  var plan = document.querySelector('.depot-plan');
+  var lager = document.getElementById('dropdown-lager').textContent.split(' ')[1];
+  var tmp_plan;
+  var tmp_id;
 
   switch (lager) {
     case 'A':
-      tmp = plans[0];
+      tmp_plan = plans[0];
+      tmp_id = ids[0];
       break;
     case 'B':
-      tmp = plans[1];
+      tmp_plan = plans[1];
+      tmp_id = ids[1];
       break;
     case 'C':
-      tmp = plans[2];
+      tmp_plan = plans[2];
+      tmp_id = ids[2];
       break;
   }
 
   switch (element.id) {
     case 'level-1':
-      plan.innerHTML = tmp[0];
+      plan.innerHTML = tmp_plan[0];
+      plan.id = tmp_id[0];
       break;
     case 'level-2':
-      plan.innerHTML = tmp[1];
+      plan.innerHTML = tmp_plan[1];
+      plan.id = tmp_id[1];
       break;
     case 'level-3':
-      plan.innerHTML = tmp[2];
+      plan.innerHTML = tmp_plan[2];
+      plan.id = tmp_id[2];
       break;
   }
   document.querySelectorAll('[type="checkbox"]').forEach(checkbox => displayTypesOfGoods(checkbox));
   updateTooltips();
+}
+
+function updatePlanStrings(id) {
+  switch (id) {
+    case 'depot_plan_A1':
+      depot_plan_A1 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    case 'depot_plan_A2':
+      depot_plan_A2 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    case 'depot_plan_A3':
+      depot_plan_A3 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    case 'depot_plan_B1':
+      depot_plan_B1 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    case 'depot_plan_B2':
+      depot_plan_B2 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    case 'depot_plan_B3':
+      depot_plan_B3 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    case 'depot_plan_C1':
+      depot_plan_C1 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    case 'depot_plan_C2':
+      depot_plan_C2 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    case 'depot_plan_C3':
+      depot_plan_C3 = document.querySelector('.depot-plan').innerHTML;
+      break;
+    default:
+      console.log('fehler');
+      break;
+  }
 }
 
 function changeAccountMode() {
@@ -1183,7 +1229,7 @@ function changeAccountMode() {
     accountIcon.setAttribute('src', `${baseUrl}account_bold.svg`);
     accountIcon.setAttribute('alt', 'Login');
     document.getElementById('account-button').setAttribute('data-bs-title', 'Login');
-    document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button') && bt.id != 'account-button') { bt.setAttribute('disabled', 'true'); } });
+    document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button') && bt.id != 'account-button') { bt.setAttribute('disabled', 'true'); document.querySelector('.depot-plan').innerHTML = ''; } });
   } else {
     var login = document.querySelector('.login');
     login.style.display = (login.style.display === 'none' || login.style.display === '') ? 'flex' : 'none';
@@ -1202,6 +1248,8 @@ function login() {
     var login = document.querySelector('.login');
     login.style.display = 'none';
     document.querySelectorAll('button').forEach(bt => { if (!bt.classList.contains('login-button')) { bt.removeAttribute('disabled'); } });
+    document.querySelector('.depot-plan').innerHTML = depot_plan_A1;
+    document.querySelector('.depot-plan').id = 'depot_plan_A1';
     updateTooltips();
   }
   email.value = '';
@@ -1307,9 +1355,10 @@ function einlagern(button) {
     values.push(p.innerHTML.split(' ')[1]);
   });
 
-  freeSlotClicked.setAttribute('fill', 'green');
+  freeSlotClicked.setAttribute('fill', 'white');
   freeSlotClicked.setAttribute('data-bs-title', values.join(' '));
   freeSlotClicked.setAttribute('onclick', 'occupiedSlot(this)');
+
 
   document.querySelector('#collapseReceiptContent').querySelectorAll('button').forEach(bt => {
     bt.innerHTML = 'Lieferschein';
@@ -1318,6 +1367,7 @@ function einlagern(button) {
   freeClicked = false;
 
   updateTooltips();
+  updatePlanStrings(document.querySelector('.depot-plan').id);
 }
 
 var occupiedClicked = false;
@@ -1339,7 +1389,9 @@ function auslagern(button) {
   occupiedSlotClicked.setAttribute('onclick', 'freeSlot(this)');
   occupiedSlotClicked.setAttribute('fill', 'green');
 
+
   updateTooltips();
+  updatePlanStrings(document.querySelector('.depot-plan').id);
   button.style.display = 'none';
 }
 

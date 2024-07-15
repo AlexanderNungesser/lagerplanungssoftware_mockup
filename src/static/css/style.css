@@ -137,7 +137,7 @@ main {
     box-sizing: border-box;
 }
 
-#depot-plan {
+.depot-plan {
     width: 100%;
     height: 100%;
     z-index: 2;
