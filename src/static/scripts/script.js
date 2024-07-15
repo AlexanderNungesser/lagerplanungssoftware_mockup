@@ -1073,7 +1073,7 @@ let depot_plan_C3 = `<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/s
 
   <text x="340" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM3.3</text>
   <rect x="340" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
-    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 12345 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
+    data-bs-placement="bottom" data-bs-title="Betäubungsmittel 54321 10 2024-07-11 20°C" onclick="occupiedSlot(this)" />
 
   <text x="480" y="570" font-family="Arial" font-size="12" fill="#000">Lagerplatz-ID: BTM4.3</text>
   <rect x="480" y="580" width="120" height="50" fill="#FFF" stroke="#000" data-bs-toggle="tooltip"
@@ -1393,6 +1393,26 @@ function auslagern(button) {
   updateTooltips();
   updatePlanStrings(document.querySelector('.depot-plan').id);
   button.style.display = 'none';
+}
+
+function searchCharge() {
+  var plans = [[depot_plan_A1, depot_plan_A2, depot_plan_A3], [depot_plan_B1, depot_plan_B2, depot_plan_B3], [depot_plan_C1, depot_plan_C2, depot_plan_C3]];
+  var num = document.querySelector('.searchbar').value;
+  var found = false
+
+  plans.forEach(row =>
+    row.forEach(plan => {
+      if (plan.includes(` ${num} `)) {
+        found = true;
+        let lager = String.fromCharCode('A'.charCodeAt(0) + plans.indexOf(row));
+        let level = 1 + row.indexOf(plan);
+        window.alert(`Die Charge ${num} ist in Lager ${lager} auf Level ${level}`);
+      }
+    }));
+
+  if (!found) {
+    window.alert(`Die Charge ${num} konnte nicht gefunden werden`);
+  }
 }
 
 const leftParams = document.querySelector('.left_params');
