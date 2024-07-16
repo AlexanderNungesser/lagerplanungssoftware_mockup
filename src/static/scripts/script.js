@@ -1251,6 +1251,8 @@ function login() {
     document.querySelector('.depot-plan').innerHTML = depot_plan_A1;
     document.querySelector('.depot-plan').id = 'depot_plan_A1';
     updateTooltips();
+  }else{
+    window.alert(`Falsches Passwort oder Email`);
   }
   email.value = '';
   password.value = '';
