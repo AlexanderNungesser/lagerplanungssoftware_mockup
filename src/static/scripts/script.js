@@ -1239,7 +1239,7 @@ function changeAccountMode() {
 function login() {
   var email = document.getElementById('floatingEmail');
   var password = document.getElementById('floatingPassword');
-  if (email.value == 'a' && password.value == 'a') {
+  if (email.value == 'admin@smartdepot.com' && password.value == 'admin') {
     var accountIcon = document.getElementById('account-icon');
     var baseUrl = accountIcon.getAttribute('data-base-url');
     accountIcon.setAttribute('src', `${baseUrl}logout_bold.svg`);
