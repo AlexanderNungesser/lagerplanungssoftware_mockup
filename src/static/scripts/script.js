@@ -1277,6 +1277,12 @@ function displayDeliveryForm(type) {
 
 function closeDeliveryForm() {
   document.querySelector('.add-delivery').style.display = 'none';
+  var title = document.getElementById('floatingTitle').value = '';
+  var charge = document.getElementById('floatingCharge').value = '';
+  var paletes = document.getElementById('floatingPaletten').value = '';
+  var date = document.getElementById('floatingDatum').value = '';
+  var temp = document.getElementById('floatingTemp').value = '';
+  var notes = document.getElementById('floatingText').value = '';
 }
 
 function getTodayDate() {
@@ -1295,6 +1301,26 @@ function createDelivery(button) {
   var paletes = document.getElementById('floatingPaletten');
   var date = document.getElementById('floatingDatum');
   var temp = document.getElementById('floatingTemp');
+
+  if (title.value == '' || charge.value == '' || paletes.value == '' || date.value == '' || temp.value == '') {
+    window.alert(`Bitte füllen Sie alle Felder aus`);
+    return;
+  }
+
+  if (charge.value.length != 5) {
+    window.alert(`Die Charge-Nr. muss 5-stellig sein`);
+    return;
+  }
+
+  if (paletes.value <= 0 || paletes.value > 10) {
+    window.alert(`Die Anzahl der Paletten muss zwischen 1 und 10 liegen`);
+    return;
+  }
+
+  if (temp.value < -20 || temp.value > 25) {
+    window.alert(`Die Temperatur muss zwischen -20°C und 25°C liegen`);
+    return;
+  }
 
   var content = (button.parentElement.id == "receipt") ? document.getElementById('collapseReceiptContent') : document.getElementById('collapseSendContent');
   content.innerHTML += `<div class="card card-body">
